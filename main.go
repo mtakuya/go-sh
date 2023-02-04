@@ -37,13 +37,14 @@ func exec(t string) {
 	} else if s[0] == "pwd" {
 		pwd()
 	} else {
-		os.Exit(1)
+		fmt.Println("command not found")
+		loop()
 	}
 }
 
 func exit(err error) {
 	fmt.Fprintln(os.Stderr, err)
-	os.Exit(1)
+	loop()
 }
 
 func cd(s []string) {
