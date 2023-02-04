@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -38,7 +39,7 @@ func exec(t string) {
 	} else if s[0] == "pwd" {
 		pwd()
 	} else {
-		fmt.Println("command not found")
+		exit(errors.New("command not found"))
 	}
 }
 
