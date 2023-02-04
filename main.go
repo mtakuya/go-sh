@@ -38,7 +38,6 @@ func exec(t string) {
 		pwd()
 	} else {
 		fmt.Println("command not found")
-		loop()
 	}
 }
 
