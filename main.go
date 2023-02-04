@@ -46,12 +46,16 @@ func exit(err error) {
 }
 
 func cd(s []string) {
-	syscall.Chdir(s[1])
-	d, err := os.Getwd()
+	err := syscall.Chdir(s[1])
 	if err != nil {
 		exit(err)
 	} else {
-		fmt.Println(d)
+		d, err := os.Getwd()
+		if err != nil {
+			exit(err)
+		} else {
+			fmt.Println(d)
+		}
 	}
 }
 
