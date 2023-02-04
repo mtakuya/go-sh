@@ -16,12 +16,13 @@ func loop() {
 	for {
 		fmt.Print("> ")
 		s := bufio.NewScanner(os.Stdin)
-		s.Scan()
-		t := s.Text()
-		if t == "exit" {
-			break
-		} else {
-			exec(t)
+		if s.Scan() {
+			t := s.Text()
+			if t == "exit" {
+				break
+			} else {
+				exec(t)
+			}
 		}
 	}
 }
