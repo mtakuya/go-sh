@@ -44,7 +44,6 @@ func exec(t string) {
 
 func exit(err error) {
 	fmt.Fprintln(os.Stderr, err)
-	loop()
 }
 
 func cd(s []string) {
@@ -52,8 +51,9 @@ func cd(s []string) {
 	d, err := os.Getwd()
 	if err != nil {
 		exit(err)
+	} else {
+		fmt.Println(d)
 	}
-	fmt.Println(d)
 }
 
 func ls() {
@@ -64,9 +64,10 @@ func ls() {
 	file, err := os.ReadDir(d)
 	if err != nil {
 		exit(err)
-	}
-	for _, f := range file {
-		fmt.Println(f.Name())
+	} else {
+		for _, f := range file {
+			fmt.Println(f.Name())
+		}
 	}
 }
 
@@ -74,14 +75,16 @@ func cat(s []string) {
 	b, err := os.ReadFile(s[1])
 	if err != nil {
 		exit(err)
+	} else {
+		fmt.Print(string(b))
 	}
-	fmt.Print(string(b))
 }
 
 func pwd() {
 	d, err := os.Getwd()
 	if err != nil {
 		exit(err)
+	} else {
+		fmt.Println(d)
 	}
-	fmt.Println(d)
 }
