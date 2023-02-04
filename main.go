@@ -65,13 +65,14 @@ func ls() {
 	d, err := os.Getwd()
 	if err != nil {
 		exit(err)
-	}
-	file, err := os.ReadDir(d)
-	if err != nil {
-		exit(err)
 	} else {
-		for _, f := range file {
-			fmt.Println(f.Name())
+		file, err := os.ReadDir(d)
+		if err != nil {
+			exit(err)
+		} else {
+			for _, f := range file {
+				fmt.Println(f.Name())
+			}
 		}
 	}
 }
