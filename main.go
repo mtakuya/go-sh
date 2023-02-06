@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"github.com/mitchellh/go-ps"
+	"github.com/shirou/gopsutil/process"
 	"os"
 	"strings"
 	"syscall"
@@ -43,7 +43,7 @@ func exec(t string) {
 	} else if c == "pwd" {
 		pwd()
 	} else if c == "ps" {
-		_ps()
+		ps()
 	} else {
 		exit(errors.New("command not found"))
 	}
@@ -57,13 +57,13 @@ func cd(s []string) {
 	err := syscall.Chdir(s[1])
 	if err != nil {
 		exit(err)
+		return
+	}
+	d, err := os.Getwd()
+	if err != nil {
+		exit(err)
 	} else {
-		d, err := os.Getwd()
-		if err != nil {
-			exit(err)
-		} else {
-			fmt.Println(d)
-		}
+		fmt.Println(d)
 	}
 }
 
@@ -71,15 +71,15 @@ func ls() {
 	d, err := os.Getwd()
 	if err != nil {
 		exit(err)
-	} else {
-		file, err := os.ReadDir(d)
-		if err != nil {
-			exit(err)
-		} else {
-			for _, f := range file {
-				fmt.Println(f.Name())
-			}
-		}
+		return
+	}
+	file, err := os.ReadDir(d)
+	if err != nil {
+		exit(err)
+		return
+	}
+	for _, f := range file {
+		fmt.Println(f.Name())
 	}
 }
 
@@ -91,28 +91,38 @@ func cat(s []string) {
 	b, err := os.ReadFile(s[1])
 	if err != nil {
 		exit(err)
-	} else {
-		fmt.Print(string(b))
+		return
 	}
+	fmt.Print(string(b))
 }
 
 func pwd() {
 	d, err := os.Getwd()
 	if err != nil {
 		exit(err)
-	} else {
-		fmt.Println(d)
+		return
 	}
+	fmt.Println(d)
 }
 
-// https://github.com/mitchellh/go-ps/issues/2
-func _ps() {
-	prs, err := ps.Processes()
+func ps() {
+	prs, err := process.Processes()
 	if err != nil {
 		exit(err)
-	} else {
-		for _, p := range prs {
-			fmt.Println(p.Pid(), p.PPid(), p.Executable())
+		return
+	}
+	for _, p := range prs {
+		pid := p.Pid
+		ppid, err := p.Ppid()
+		if err != nil {
+			exit(err)
+			return
 		}
+		name, err := p.Name()
+		if err != nil {
+			exit(err)
+			return
+		}
+		fmt.Println(pid, ppid, name)
 	}
 }
