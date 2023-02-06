@@ -31,17 +31,18 @@ func loop() {
 
 func exec(t string) {
 	s := strings.Split(t, " ")
-	if s[0] == "cd" {
+	c := s[0]
+	if c == "cd" {
 		cd(s)
-	} else if s[0] == "ls" {
+	} else if c == "ls" {
 		ls()
-	} else if s[0] == "sl" {
+	} else if c == "sl" {
 		sl()
-	} else if s[0] == "cat" {
+	} else if c == "cat" {
 		cat(s)
-	} else if s[0] == "pwd" {
+	} else if c == "pwd" {
 		pwd()
-	} else if s[0] == "ps" {
+	} else if c == "ps" {
 		_ps()
 	} else {
 		exit(errors.New("command not found"))
