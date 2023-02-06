@@ -35,6 +35,8 @@ func exec(t string) {
 		cd(s)
 	} else if s[0] == "ls" {
 		ls()
+	} else if s[0] == "sl" {
+		sl()
 	} else if s[0] == "cat" {
 		cat(s)
 	} else if s[0] == "pwd" {
@@ -78,6 +80,10 @@ func ls() {
 			}
 		}
 	}
+}
+
+func sl() {
+	fmt.Println("∠凸回_曲曲_回回回_回回回~~")
 }
 
 func cat(s []string) {
