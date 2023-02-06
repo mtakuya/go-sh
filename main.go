@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"github.com/shirou/gopsutil/mem"
 	"github.com/shirou/gopsutil/process"
 	"os"
 	"strings"
@@ -44,6 +45,8 @@ func exec(t string) {
 		pwd()
 	} else if c == "ps" {
 		ps()
+	} else if c == "free" {
+		free()
 	} else {
 		exit(errors.New("command not found"))
 	}
@@ -125,4 +128,14 @@ func ps() {
 		}
 		fmt.Println(pid, ppid, name)
 	}
+}
+
+// https://github.com/shirou/gopsutil#usage
+func free() {
+	v, err := mem.VirtualMemory()
+	if err != nil {
+		exit(err)
+		return
+	}
+	fmt.Printf("Total: %v, Free:%v, UsedPercent:%f%%\n", v.Total, v.Free, v.UsedPercent)
 }
