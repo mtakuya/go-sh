@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"github.com/mitchellh/go-ps"
 	"os"
 	"strings"
 	"syscall"
@@ -38,6 +39,8 @@ func exec(t string) {
 		cat(s)
 	} else if s[0] == "pwd" {
 		pwd()
+	} else if s[0] == "ps" {
+		_ps()
 	} else {
 		exit(errors.New("command not found"))
 	}
@@ -92,5 +95,16 @@ func pwd() {
 		exit(err)
 	} else {
 		fmt.Println(d)
+	}
+}
+
+func _ps() {
+	prs, err := ps.Processes()
+	if err != nil {
+		exit(err)
+	} else {
+		for _, p := range prs {
+			fmt.Println(p.Pid(), p.PPid(), p.Executable())
+		}
 	}
 }
