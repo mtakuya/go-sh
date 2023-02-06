@@ -105,6 +105,7 @@ func pwd() {
 	}
 }
 
+// https://github.com/mitchellh/go-ps/issues/2
 func _ps() {
 	prs, err := ps.Processes()
 	if err != nil {
