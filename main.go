@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"github.com/shirou/gopsutil/mem"
 	"github.com/shirou/gopsutil/process"
@@ -23,119 +22,194 @@ func loop() {
 			t := s.Text()
 			if t == "exit" {
 				break
+			} else if strings.Contains(t, "|") {
+				result, err := pipe(t)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					continue
+				} else {
+					fmt.Println(result)
+				}
 			} else {
-				exec(t)
+				result, err := exec(t)
+				if err != nil {
+					fmt.Fprintln(os.Stderr, err)
+					continue
+				} else {
+					fmt.Println(result)
+				}
 			}
 		}
 	}
 }
 
-func exec(t string) {
+func pipe(t string) (string, error) {
+	ss := strings.Split(t, "|")
+	var tss []string
+	var result string
+	var err error
+
+	for _, s := range ss {
+		t1 := strings.TrimLeft(s, " ")
+		t2 := strings.TrimRight(t1, " ")
+		tss = append(tss, t2)
+	}
+
+	for _, s := range tss {
+		if result == "" {
+			result, err = exec(s)
+		} else {
+			result, err = exec(s + " " + result)
+		}
+	}
+	if err != nil {
+		return "", err
+	}
+	return result, err
+}
+
+func exec(t string) (string, error) {
+	var result string
+	var err error
 	s := strings.Split(t, " ")
 	c := s[0]
+
 	if c == "cd" {
-		cd(s)
+		result, err = cd(t)
 	} else if c == "ls" {
-		ls()
+		result, err = ls()
 	} else if c == "sl" {
-		sl()
+		result, err = sl()
 	} else if c == "cat" {
-		cat(s)
+		result, err = cat(t)
 	} else if c == "pwd" {
-		pwd()
+		result, err = pwd()
 	} else if c == "ps" {
-		ps()
+		result, err = ps()
 	} else if c == "free" {
-		free()
+		result, err = free()
+	} else if c == "echo" {
+		result, err = echo(t)
+	} else if c == "grep" {
+		result, err = grep(t)
 	} else {
-		exit(errors.New("command not found"))
+		result, err = "", fmt.Errorf("command not found %s", c)
 	}
+	return result, err
 }
 
-func exit(err error) {
-	fmt.Fprintln(os.Stderr, err)
-}
-
-func cd(s []string) {
-	err := syscall.Chdir(s[1])
+func cd(s string) (string, error) {
+	c := strings.Split(s, " ")
+	err := syscall.Chdir(c[1])
 	if err != nil {
-		exit(err)
-		return
+		return "", fmt.Errorf("%s %s", err, c[1])
 	}
 	d, err := os.Getwd()
 	if err != nil {
-		exit(err)
+		return "", err
 	} else {
-		fmt.Println(d)
+		return d, nil
 	}
 }
 
-func ls() {
+func ls() (string, error) {
 	d, err := os.Getwd()
 	if err != nil {
-		exit(err)
-		return
+		return "", err
 	}
 	file, err := os.ReadDir(d)
 	if err != nil {
-		exit(err)
-		return
+		return "", err
 	}
+	var b strings.Builder
 	for _, f := range file {
-		fmt.Println(f.Name())
+		fmt.Fprintf(&b, "%s\n", f.Name())
 	}
+	return strings.TrimRight(b.String(), "\n"), nil
 }
 
-func sl() {
-	fmt.Println("∠凸回_曲曲_回回回_回回回~~")
+func sl() (string, error) {
+	return "∠凸回_曲曲_回回回_回回回~~", nil
 }
 
-func cat(s []string) {
-	b, err := os.ReadFile(s[1])
+func cat(s string) (string, error) {
+	c := strings.Split(s, " ")
+	b, err := os.ReadFile(c[1])
 	if err != nil {
-		exit(err)
-		return
+		return "", err
 	}
-	fmt.Print(string(b))
+	return string(b), nil
 }
 
-func pwd() {
+func pwd() (string, error) {
 	d, err := os.Getwd()
 	if err != nil {
-		exit(err)
-		return
+		return "", err
 	}
-	fmt.Println(d)
+	return d, nil
 }
 
-func ps() {
+func ps() (string, error) {
 	prs, err := process.Processes()
 	if err != nil {
-		exit(err)
-		return
+		return "", err
 	}
+	var b strings.Builder
 	for _, p := range prs {
 		pid := p.Pid
 		ppid, err := p.Ppid()
 		if err != nil {
-			exit(err)
-			return
+			return "", err
 		}
 		name, err := p.Name()
 		if err != nil {
-			exit(err)
-			return
+			return "", err
 		}
-		fmt.Println(pid, ppid, name)
+		_, err = fmt.Fprintf(&b, "%d %d %s\n", pid, ppid, name)
+		if err != nil {
+			return "", err
+		}
 	}
+	return strings.TrimRight(b.String(), "\n"), nil
 }
 
 // https://github.com/shirou/gopsutil#usage
-func free() {
+func free() (string, error) {
 	v, err := mem.VirtualMemory()
 	if err != nil {
-		exit(err)
-		return
+		return "", err
 	}
-	fmt.Printf("Total: %v, Free:%v, UsedPercent:%f%%\n", v.Total, v.Free, v.UsedPercent)
+	var b strings.Builder
+	_, err = fmt.Fprintf(&b, "Total: %v, Free:%v, UsedPercent:%f%%", v.Total, v.Free, v.UsedPercent)
+	if err != nil {
+		return "", err
+	}
+	return b.String(), nil
+}
+
+func echo(t string) (string, error) {
+	s := strings.Split(t, " ")
+	return s[1], nil
+}
+
+func grep(t string) (string, error) {
+	s := strings.Split(t, " ")
+	if strings.Contains(t, "\n") {
+		var b strings.Builder
+		for _, ss := range strings.Split(t[len(s[0])+len(s[1])+2:], "\n") {
+			if strings.Contains(ss, s[1]) {
+				_, err := fmt.Fprintf(&b, "%s\n", ss)
+				if err != nil {
+					return "", err
+				}
+			}
+		}
+		return b.String(), nil
+	} else {
+		if strings.Contains(s[2], s[1]) {
+			return s[2], nil
+		} else {
+			return "", nil
+		}
+	}
 }
