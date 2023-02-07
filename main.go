@@ -204,7 +204,7 @@ func grep(t string) (string, error) {
 				}
 			}
 		}
-		return b.String(), nil
+		return strings.TrimRight(b.String(), "\n"), nil
 	} else {
 		if strings.Contains(s[2], s[1]) {
 			return s[2], nil
