@@ -173,18 +173,12 @@ func ps() (string, error) {
 	return strings.TrimRight(b.String(), "\n"), nil
 }
 
-// https://github.com/shirou/gopsutil#usage
 func free() (string, error) {
 	v, err := mem.VirtualMemory()
 	if err != nil {
 		return "", err
 	}
-	var b strings.Builder
-	_, err = fmt.Fprintf(&b, "Total: %v, Free:%v, UsedPercent:%f%%", v.Total, v.Free, v.UsedPercent)
-	if err != nil {
-		return "", err
-	}
-	return b.String(), nil
+	return fmt.Sprintf("Total: %v, Free:%v, UsedPercent:%f%%", v.Total, v.Free, v.UsedPercent), nil
 }
 
 func echo(t string) (string, error) {
