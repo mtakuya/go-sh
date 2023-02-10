@@ -25,7 +25,9 @@ func loop() {
 					fmt.Fprintln(os.Stderr, err)
 					continue
 				} else {
-					fmt.Println(result)
+					if result != "" {
+						fmt.Println(result)
+					}
 				}
 			} else {
 				result, err := exec(t)
@@ -33,7 +35,9 @@ func loop() {
 					fmt.Fprintln(os.Stderr, err)
 					continue
 				} else {
-					fmt.Println(result)
+					if result != "" {
+						fmt.Println(result)
+					}
 				}
 			}
 		}
