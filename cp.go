@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"io"
 	"os"
 	"strings"
@@ -8,6 +9,10 @@ import (
 
 func cp(s string) (string, error) {
 	c := strings.Split(s, " ")
+	if len(c) < 3 {
+		return "", errors.New("cp error")
+	}
+
 	src, err := os.Open(c[1])
 	if err != nil {
 		return "", err

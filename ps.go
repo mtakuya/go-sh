@@ -8,9 +8,11 @@ import (
 
 func ps() (string, error) {
 	prs, err := process.Processes()
+
 	if err != nil {
 		return "", err
 	}
+
 	var b strings.Builder
 	for _, p := range prs {
 		pid := p.Pid

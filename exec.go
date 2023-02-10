@@ -8,7 +8,12 @@ import (
 func exec(t string) (string, error) {
 	var result string
 	var err error
+
 	s := strings.Split(t, " ")
+	if len(s) < 1 {
+		return "", fmt.Errorf("command not found %s", t)
+	}
+
 	c := s[0]
 
 	if c == "cd" {

@@ -1,8 +1,14 @@
 package main
 
-import "strings"
+import (
+	"errors"
+	"strings"
+)
 
-func echo(t string) (string, error) {
-	s := strings.Split(t, " ")
-	return s[1], nil
+func echo(s string) (string, error) {
+	c := strings.Split(s, " ")
+	if len(c) < 2 {
+		return "", errors.New("echo error")
+	}
+	return c[1], nil
 }

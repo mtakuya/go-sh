@@ -1,14 +1,17 @@
 package main
 
-import "strings"
+import (
+	"strings"
+)
 
 func pipe(t string) (string, error) {
-	ss := strings.Split(t, "|")
 	var tss []string
 	var result string
 	var err error
 
-	for _, s := range ss {
+	c := strings.Split(t, "|")
+
+	for _, s := range c {
 		t1 := strings.TrimLeft(s, " ")
 		t2 := strings.TrimRight(t1, " ")
 		tss = append(tss, t2)
