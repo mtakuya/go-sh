@@ -27,6 +27,10 @@ func exec(t string) (string, error) {
 		result, err = echo(t)
 	} else if c == "grep" {
 		result, err = grep(t)
+	} else if c == "cp" {
+		result, err = cp(t)
+	} else if c == "rm" {
+		result, err = rm(t)
 	} else {
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
