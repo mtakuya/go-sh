@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 )
@@ -11,7 +12,7 @@ func exec(t string) (string, error) {
 
 	s := strings.Split(t, " ")
 	if len(s) == 0 {
-		return "", fmt.Errorf("command not found %s", t)
+		return "", errors.New("exec error")
 	}
 
 	c := s[0]
