@@ -19,4 +19,9 @@ func Test_grep(t *testing.T) {
 	if s == "" {
 		t.Error("grep error")
 	}
+
+	_, err = grep("grep")
+	if err == nil {
+		t.Errorf("got true, want false")
+	}
 }

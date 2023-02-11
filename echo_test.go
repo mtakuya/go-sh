@@ -11,4 +11,9 @@ func Test_echo(t *testing.T) {
 	if s != "test" {
 		t.Errorf("got %s, want %s", s, "test")
 	}
+
+	_, err = echo("echo")
+	if err == nil {
+		t.Errorf("got true, want false")
+	}
 }

@@ -11,4 +11,9 @@ func Test_exec(t *testing.T) {
 	if s != "test" {
 		t.Errorf("got %s, want %s", s, "test")
 	}
+
+	s, err = exec("")
+	if err == nil {
+		t.Errorf("got true, want false")
+	}
 }

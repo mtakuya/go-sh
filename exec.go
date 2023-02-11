@@ -10,7 +10,7 @@ func exec(t string) (string, error) {
 	var err error
 
 	s := strings.Split(t, " ")
-	if len(s) < 1 {
+	if len(s) == 0 {
 		return "", fmt.Errorf("command not found %s", t)
 	}
 
