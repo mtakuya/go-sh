@@ -49,7 +49,7 @@ func grep(s string) (string, error) {
 				return "", nil
 			}
 		} else {
-			return "", nil
+			return "", err
 		}
 	}
 }

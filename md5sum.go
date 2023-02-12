@@ -31,6 +31,6 @@ func md5sum(s string) (string, error) {
 		io.WriteString(h, c[1])
 		return hex.EncodeToString(h.Sum(nil)), nil
 	} else {
-		return "", nil
+		return "", err
 	}
 }
