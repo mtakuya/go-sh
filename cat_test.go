@@ -10,6 +10,6 @@ func Test_cat(t *testing.T) {
 
 	_, err = cat("cat")
 	if err == nil {
-		t.Errorf("got true, want false")
+		t.Error("got true, want false")
 	}
 }
