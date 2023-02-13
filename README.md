@@ -15,5 +15,6 @@ grep
 history
 ls
 md5sum
+ps
 pwd
 rm
