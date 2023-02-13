@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+var histories []string
+
 func main() {
 	loop()
 }
@@ -21,6 +23,7 @@ func loop() {
 
 		if s.Scan() {
 			t := s.Text()
+			histories = append(histories, t)
 
 			if t == "exit" {
 				break

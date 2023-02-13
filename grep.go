@@ -25,7 +25,6 @@ func grep(s string) (string, error) {
 		}
 		return strings.TrimRight(b.String(), "\n"), nil
 	} else {
-
 		if _, err := os.Stat(c[2]); err == nil {
 			b, err := os.ReadFile(c[2])
 			if err != nil {

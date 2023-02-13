@@ -39,6 +39,8 @@ func exec(t string) (string, error) {
 		result, err = rm(t)
 	} else if c == "md5sum" {
 		result, err = md5sum(t)
+	} else if c == "history" {
+		result, err = history()
 	} else {
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
