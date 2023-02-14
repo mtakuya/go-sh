@@ -23,13 +23,15 @@ func loop() {
 
 		if s.Scan() {
 			t := s.Text()
-			histories = append(histories, t)
-
 			if t == "exit" {
 				break
 			} else if strings.Contains(t, "|") {
+				histories = append(histories, t)
 				result, err = pipe(t)
+			} else if 0 < len(t) && t[0] == '!' {
+				result, err = historyExec(t)
 			} else {
+				histories = append(histories, t)
 				result, err = exec(t)
 			}
 
