@@ -14,9 +14,16 @@ func cd(s string) (string, error) {
 		return "", errors.New("cd error")
 	}
 
-	err := syscall.Chdir(c[1])
+	var path string
+	if c[1] == "~" {
+		path = os.Getenv("HOME")
+	} else {
+		path = c[1]
+	}
+
+	err := syscall.Chdir(path)
 	if err != nil {
-		return "", fmt.Errorf("%s %s", err, c[1])
+		return "", fmt.Errorf("%s %s", err, path)
 	}
 
 	d, err := os.Getwd()
