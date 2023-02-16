@@ -1,6 +1,6 @@
 # go-sh
 ## Installation
-$ go install github.com/mtakuya/go-sh@v1.1.14
+$ go install github.com/mtakuya/go-sh@v1.1.15
 
 ## Usage
 $ go-sh
@@ -15,6 +15,7 @@ grep
 history
 ls
 md5sum
+mkdir
 ps
 pwd
 rm

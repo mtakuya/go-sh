@@ -41,6 +41,8 @@ func exec(t string) (string, error) {
 		result, err = md5sum(t)
 	} else if c == "history" {
 		result, err = history()
+	} else if c == "mkdir" {
+		result, err = mkdir(t)
 	} else {
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
