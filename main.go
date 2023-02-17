@@ -25,7 +25,7 @@ func loop() {
 			t := s.Text()
 			if t == "exit" {
 				break
-			} else if strings.Contains(t, "|") {
+			} else if strings.Contains(t, "|") && !strings.HasPrefix(t, "time") {
 				histories = append(histories, t)
 				result, err = pipe(t)
 			} else if 0 < len(t) && t[0] == '!' {

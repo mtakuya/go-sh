@@ -1,6 +1,6 @@
 # go-sh
 ## Installation
-$ go install github.com/mtakuya/go-sh@v1.1.15
+$ go install github.com/mtakuya/go-sh@v1.1.16
 
 ## Usage
 $ go-sh
@@ -19,3 +19,4 @@ mkdir
 ps
 pwd
 rm
+time
