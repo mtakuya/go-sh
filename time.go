@@ -25,6 +25,6 @@ func _time(s string) (string, error) {
 	after := time.Since(now)
 	afterMillis := after.Milliseconds()
 	afterMicros := after.Microseconds()
-	result = fmt.Sprintf("%s\n%s %dms %dμs", result, s[5:], afterMillis, afterMicros)
+	result = fmt.Sprintf("%s\n%s %dms, %dμs", result, s[5:], afterMillis, afterMicros)
 	return result, err
 }
