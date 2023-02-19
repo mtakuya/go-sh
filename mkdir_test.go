@@ -18,6 +18,6 @@ func Test_mkdir(t *testing.T) {
 		t.Error(err)
 	}
 	if fi.Name() != "mkdir_test" {
-		t.Errorf("got %s, want test", fi.Name())
+		t.Errorf("got %s, want mkdir_test", fi.Name())
 	}
 }
