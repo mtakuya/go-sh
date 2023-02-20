@@ -45,6 +45,8 @@ func exec(t string) (string, error) {
 		result, err = mkdir(t)
 	} else if c == "time" {
 		result, err = _time(t)
+	} else if c == "env" {
+		result, err = env()
 	} else {
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
