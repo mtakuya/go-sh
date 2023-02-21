@@ -47,6 +47,8 @@ func exec(t string) (string, error) {
 		result, err = _time(t)
 	} else if c == "env" {
 		result, err = env()
+	} else if c == "tee" {
+		result, err = tee(t)
 	} else {
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
