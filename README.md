@@ -1,6 +1,6 @@
 # go-sh
 ## Installation
-$ go install github.com/mtakuya/go-sh@v1.1.19
+$ go install github.com/mtakuya/go-sh@v1.1.20
 
 ## Usage
 $ go-sh
@@ -22,3 +22,4 @@ pwd
 rm
 tee
 time
+touch

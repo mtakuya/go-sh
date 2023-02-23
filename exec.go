@@ -49,6 +49,8 @@ func exec(t string) (string, error) {
 		result, err = env()
 	} else if c == "tee" {
 		result, err = tee(t)
+	} else if c == "touch" {
+		result, err = touch(t)
 	} else {
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
