@@ -1,6 +1,6 @@
 # go-sh
 ## Installation
-$ go install github.com/mtakuya/go-sh@v1.1.20
+$ go install github.com/mtakuya/go-sh@v1.1.21
 
 ## Usage
 $ go-sh

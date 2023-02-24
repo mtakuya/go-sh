@@ -17,14 +17,23 @@ func _time(s string) (string, error) {
 	var err error
 
 	now := time.Now()
-	if strings.Contains(s, "|") {
+	if strings.Contains(s, ">") {
+		result, err = redirect(s[5:])
+	} else if strings.Contains(s, "|") {
 		result, err = pipe(s[5:])
 	} else {
 		result, err = exec(s[5:])
 	}
+
 	after := time.Since(now)
 	afterMillis := after.Milliseconds()
 	afterMicros := after.Microseconds()
-	result = fmt.Sprintf("%s\n%s %dms, %dμs", result, s[5:], afterMillis, afterMicros)
+
+	if result == "" {
+		result = fmt.Sprintf("%s %dms, %dμs", s[5:], afterMillis, afterMicros)
+	} else {
+		result = fmt.Sprintf("%s\n%s %dms, %dμs", result, s[5:], afterMillis, afterMicros)
+	}
+
 	return result, err
 }
