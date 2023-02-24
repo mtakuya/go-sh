@@ -22,7 +22,9 @@ func historyExec(s string) (string, error) {
 	}
 
 	var result string
-	if strings.Contains(histories[i], "|") && !strings.HasPrefix(histories[i], "time") {
+	if strings.Contains(histories[i], ">") && !strings.HasPrefix(histories[i], "time") {
+		result, err = redirect(histories[i])
+	} else if strings.Contains(histories[i], "|") && !strings.HasPrefix(histories[i], "time") {
 		result, err = pipe(histories[i])
 	} else {
 		result, err = exec(histories[i])
