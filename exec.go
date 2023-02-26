@@ -51,6 +51,8 @@ func exec(t string) (string, error) {
 		result, err = tee(t)
 	} else if c == "touch" {
 		result, err = touch(t)
+	} else if c == "date" {
+		result, err = date()
 	} else {
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
