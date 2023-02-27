@@ -17,10 +17,13 @@ func ls() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	
+
 	var b strings.Builder
 	for _, f := range file {
-		fmt.Fprintf(&b, "%s\n", f.Name())
+		_, err := fmt.Fprintf(&b, "%s\n", f.Name())
+		if err != nil {
+			return "", err
+		}
 	}
 	return strings.TrimRight(b.String(), "\n"), nil
 }

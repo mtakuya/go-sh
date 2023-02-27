@@ -11,7 +11,10 @@ func env() (string, error) {
 	var sb strings.Builder
 
 	for _, v := range envs {
-		fmt.Fprintln(&sb, v)
+		_, err := fmt.Fprintln(&sb, v)
+		if err != nil {
+			return "", err
+		}
 	}
 
 	return strings.TrimRight(sb.String(), "\n"), nil

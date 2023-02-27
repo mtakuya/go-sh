@@ -7,7 +7,12 @@ import (
 
 func Test_mkdir(t *testing.T) {
 	_, err := mkdir("mkdir mkdir_test_directory")
-	defer rm("rm mkdir_test_directory")
+	defer func() {
+		_, err := rm("rm mkdir_test_directory")
+		if err != nil {
+			t.Error(err)
+		}
+	}()
 
 	if err != nil {
 		t.Error(err)
