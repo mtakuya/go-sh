@@ -53,6 +53,8 @@ func exec(t string) (string, error) {
 		result, err = touch(t)
 	} else if c == "date" {
 		result, err = date()
+	} else if c == "diff" {
+		result, err = diff(t)
 	} else {
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}

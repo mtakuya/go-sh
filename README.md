@@ -1,6 +1,6 @@
 # go-sh
 ## Installation
-$ go install github.com/mtakuya/go-sh@v1.1.22
+$ go install github.com/mtakuya/go-sh@v1.2.0
 
 ## Usage
 $ go-sh
@@ -10,6 +10,7 @@ cat
 cd
 cp
 date
+diff
 echo
 env
 free
