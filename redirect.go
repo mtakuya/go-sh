@@ -31,10 +31,10 @@ func redirect(s string) (string, error) {
 	}
 
 	f, err := os.Create(strings.TrimLeft(c[1], " "))
-	defer f.Close()
 	if err != nil {
 		return "", err
 	}
+	defer f.Close()
 
 	_, err = f.WriteString(result)
 	if err != nil {

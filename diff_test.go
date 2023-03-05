@@ -28,8 +28,12 @@ func Test_diff(t *testing.T) {
 		t.Error(err)
 	}
 
-	_, err = diff("diff test1.txt test2.txt")
+	result, err := diff("diff test1.txt test2.txt")
 	if err != nil {
 		t.Error(err)
+	}
+
+	if result == "" {
+		t.Error("diff error")
 	}
 }

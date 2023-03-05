@@ -13,10 +13,10 @@ func tee(s string) (string, error) {
 	}
 
 	f, err := os.Create(c[1])
-	defer f.Close()
 	if err != nil {
 		return "", err
 	}
+	defer f.Close()
 
 	_, err = f.WriteString(c[2])
 	if err != nil {
