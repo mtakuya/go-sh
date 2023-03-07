@@ -34,6 +34,6 @@ func Test_diff(t *testing.T) {
 	}
 
 	if result == "" {
-		t.Error("diff error")
+		t.Error("got true, want false")
 	}
 }

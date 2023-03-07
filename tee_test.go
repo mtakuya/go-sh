@@ -16,6 +16,6 @@ func Test_tee(t *testing.T) {
 	}
 
 	if result == "" {
-		t.Errorf("got blank")
+		t.Errorf("got true, want false")
 	}
 }

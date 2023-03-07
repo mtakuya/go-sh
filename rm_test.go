@@ -23,6 +23,6 @@ func Test_rm(t *testing.T) {
 
 	_, err = os.Stat("test.txt")
 	if err == nil {
-		t.Error("rm error")
+		t.Error("got true, want false")
 	}
 }
