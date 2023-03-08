@@ -17,46 +17,48 @@ func exec(t string) (string, error) {
 
 	c := s[0]
 
-	if c == "cd" {
+	switch c {
+	case "cd":
 		result, err = cd(t)
-	} else if c == "ls" {
+	case "ls":
 		result, err = ls()
-	} else if c == "cat" {
+	case "cat":
 		result, err = cat(t)
-	} else if c == "pwd" {
+	case "pwd":
 		result, err = pwd()
-	} else if c == "ps" {
+	case "ps":
 		result, err = ps()
-	} else if c == "free" {
+	case "free":
 		result, err = free()
-	} else if c == "echo" {
+	case "echo":
 		result, err = echo(t)
-	} else if c == "grep" {
+	case "grep":
 		result, err = grep(t)
-	} else if c == "cp" {
+	case "cp":
 		result, err = cp(t)
-	} else if c == "rm" {
+	case "rm":
 		result, err = rm(t)
-	} else if c == "md5sum" {
+	case "md5sum":
 		result, err = md5sum(t)
-	} else if c == "history" {
+	case "history":
 		result, err = history()
-	} else if c == "mkdir" {
+	case "mkdir":
 		result, err = mkdir(t)
-	} else if c == "time" {
+	case "time":
 		result, err = _time(t)
-	} else if c == "env" {
+	case "env":
 		result, err = env()
-	} else if c == "tee" {
+	case "tee":
 		result, err = tee(t)
-	} else if c == "touch" {
+	case "touch":
 		result, err = touch(t)
-	} else if c == "date" {
+	case "date":
 		result, err = date()
-	} else if c == "diff" {
+	case "diff":
 		result, err = diff(t)
-	} else {
+	default:
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
+
 	return result, err
 }
