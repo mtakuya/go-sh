@@ -11,7 +11,7 @@ import (
 
 func md5sum(s string) (string, error) {
 	c := strings.Split(s, " ")
-	if len(c) < 2 {
+	if len(c) != 2 {
 		return "", errors.New("md5sum error")
 	}
 

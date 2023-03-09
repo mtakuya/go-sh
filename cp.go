@@ -9,7 +9,7 @@ import (
 
 func cp(s string) (string, error) {
 	c := strings.Split(s, " ")
-	if len(c) < 3 {
+	if len(c) != 3 {
 		return "", errors.New("cp error")
 	}
 
