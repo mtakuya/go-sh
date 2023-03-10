@@ -10,7 +10,12 @@ func Test_touch(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	defer rm("rm touch_test.txt")
+	defer func() {
+		_, err := rm("rm touch_test.txt")
+		if err != nil {
+			t.Error(err)
+		}
+	}()
 
 	fi, err := os.Stat("touch_test.txt")
 	if err != nil {
