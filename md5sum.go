@@ -28,7 +28,10 @@ func md5sum(s string) (string, error) {
 		return hex.EncodeToString(h.Sum(nil)), nil
 	} else if errors.Is(err, os.ErrNotExist) {
 		h := md5.New()
-		io.WriteString(h, c[1])
+		_, err := io.WriteString(h, c[1])
+		if err != nil {
+			return "", err
+		}
 		return hex.EncodeToString(h.Sum(nil)), nil
 	} else {
 		return "", err
