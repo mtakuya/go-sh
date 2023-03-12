@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -17,13 +18,23 @@ func cp(s string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer src.Close()
+	defer func() {
+		err := src.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
 
 	dst, err := os.Create(c[2])
 	if err != nil {
 		return "", err
 	}
-	defer dst.Close()
+	defer func() {
+		err := dst.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
 
 	_, err = io.Copy(dst, src)
 	if err != nil {

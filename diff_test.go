@@ -14,7 +14,13 @@ func Test_diff(t *testing.T) {
 		}
 	}()
 
-	defer f1.Close()
+	defer func() {
+		err := f1.Close()
+		if err != nil {
+			t.Error(err)
+		}
+	}()
+
 	if err != nil {
 		t.Error(err)
 	}
@@ -31,7 +37,13 @@ func Test_diff(t *testing.T) {
 		}
 	}()
 
-	defer f2.Close()
+	defer func() {
+		err := f2.Close()
+		if err != nil {
+			t.Error(err)
+		}
+	}()
+
 	if err != nil {
 		t.Error(err)
 	}

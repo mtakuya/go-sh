@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"errors"
+	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -20,7 +21,13 @@ func md5sum(s string) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		defer f.Close()
+		defer func() {
+			err := f.Close()
+			if err != nil {
+				fmt.Println(err)
+			}
+		}()
+
 		h := md5.New()
 		if _, err := io.Copy(h, f); err != nil {
 			return "", err

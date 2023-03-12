@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -16,7 +17,12 @@ func touch(s string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer f.Close()
+	defer func() {
+		err := f.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
 
 	return "", nil
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -34,7 +35,12 @@ func redirect(s string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer f.Close()
+	defer func() {
+		err := f.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
 
 	_, err = f.WriteString(result)
 	if err != nil {
