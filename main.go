@@ -39,7 +39,7 @@ func loop() {
 			}
 
 			if err != nil {
-				fmt.Fprintln(os.Stderr, err)
+				fmt.Println(err)
 			} else {
 				if result != "" {
 					fmt.Println(result)
