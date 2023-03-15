@@ -56,6 +56,8 @@ func exec(t string) (string, error) {
 		result, err = date()
 	case "diff":
 		result, err = diff(t)
+	case "uniq":
+		result, err = uniq(t)
 	default:
 		result, err = "", fmt.Errorf("command not found %s", c)
 	}
