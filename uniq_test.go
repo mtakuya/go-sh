@@ -13,4 +13,9 @@ func Test_uniq(t *testing.T) {
 	if result != "a\nb\nc" {
 		t.Error("uniq error")
 	}
+
+	result, err = uniq("uniq main.go")
+	if result != "" {
+		t.Error("uniq error")
+	}
 }
