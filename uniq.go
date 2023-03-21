@@ -11,7 +11,7 @@ import (
 func uniq(s string) (string, error) {
 	c := strings.Split(s, " ")
 
-	if len(c) > 2 || len(c) <= 1 {
+	if len(c) != 2 {
 		return "", errors.New("uniq error")
 	}
 
