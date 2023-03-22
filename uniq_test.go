@@ -18,4 +18,9 @@ func Test_uniq(t *testing.T) {
 	if err == nil {
 		t.Error("uniq error")
 	}
+
+	_, err = uniq("uniq a b")
+	if err == nil {
+		t.Error("uniq error")
+	}
 }
