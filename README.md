@@ -25,5 +25,6 @@ rm
 tee
 time
 touch
+uniq
 `|`
 `>`
