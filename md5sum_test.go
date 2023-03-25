@@ -10,4 +10,9 @@ func Test_md5sum(t *testing.T) {
 	if s != "ea703e7aa1efda0064eaa507d9e8ab7e" {
 		t.Errorf("got %s, want ea703e7aa1efda0064eaa507d9e8ab7e", s)
 	}
+
+	_, err = md5sum("md5")
+	if err == nil {
+		t.Error("md5sum error")
+	}
 }
