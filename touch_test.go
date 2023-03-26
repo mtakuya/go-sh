@@ -25,4 +25,9 @@ func Test_touch(t *testing.T) {
 	if fi.Name() != "touch_test.txt" {
 		t.Errorf("got %s, want %s", fi.Name(), "touch_test.txt")
 	}
+
+	_, err = touch("touch")
+	if err == nil {
+		t.Error("touch error")
+	}
 }
