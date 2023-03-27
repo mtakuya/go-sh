@@ -25,4 +25,9 @@ func Test_mkdir(t *testing.T) {
 	if fi.Name() != "mkdir_test_directory" {
 		t.Errorf("got %s, want mkdir_test", fi.Name())
 	}
+
+	_, err = mkdir("mkdir")
+	if err == nil {
+		t.Error("mkdir error")
+	}
 }
