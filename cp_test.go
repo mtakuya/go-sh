@@ -7,4 +7,14 @@ func Test_cp(t *testing.T) {
 	if err == nil {
 		t.Error("cp error")
 	}
+
+	_, err = cp("cp a")
+	if err == nil {
+		t.Error("cp error")
+	}
+
+	_, err = cp("cp a b c")
+	if err == nil {
+		t.Error("cp error")
+	}
 }
