@@ -12,4 +12,14 @@ func Test_cd(t *testing.T) {
 	if err == nil {
 		t.Errorf("got true, want false")
 	}
+
+	_, err = cd("cd a b")
+	if err == nil {
+		t.Errorf("got true, want false")
+	}
+
+	_, err = cd("cd a b c")
+	if err == nil {
+		t.Errorf("got true, want false")
+	}
 }
