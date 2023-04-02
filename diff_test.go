@@ -63,6 +63,6 @@ func Test_diff(t *testing.T) {
 
 	_, err = diff("diff")
 	if err == nil {
-		t.Error("diff error")
+		t.Error("got true, want false")
 	}
 }

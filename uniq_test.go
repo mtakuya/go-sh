@@ -16,11 +16,11 @@ func Test_uniq(t *testing.T) {
 
 	_, err = uniq("uniq")
 	if err == nil {
-		t.Error("uniq error")
+		t.Error("got true, want false")
 	}
 
 	_, err = uniq("uniq a b")
 	if err == nil {
-		t.Error("uniq error")
+		t.Error("got true, want false")
 	}
 }

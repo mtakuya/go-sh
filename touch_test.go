@@ -28,6 +28,6 @@ func Test_touch(t *testing.T) {
 
 	_, err = touch("touch")
 	if err == nil {
-		t.Error("touch error")
+		t.Error("got true, want false")
 	}
 }

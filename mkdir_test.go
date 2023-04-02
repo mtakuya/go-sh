@@ -28,6 +28,6 @@ func Test_mkdir(t *testing.T) {
 
 	_, err = mkdir("mkdir")
 	if err == nil {
-		t.Error("mkdir error")
+		t.Error("got true, want false")
 	}
 }

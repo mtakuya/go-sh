@@ -13,6 +13,6 @@ func Test_md5sum(t *testing.T) {
 
 	_, err = md5sum("md5")
 	if err == nil {
-		t.Error("md5sum error")
+		t.Error("got true, want false")
 	}
 }
