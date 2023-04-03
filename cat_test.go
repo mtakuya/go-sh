@@ -12,4 +12,9 @@ func Test_cat(t *testing.T) {
 	if err == nil {
 		t.Error("got true, want false")
 	}
+
+	_, err = cat("cat a b")
+	if err == nil {
+		t.Error("got true, want false")
+	}
 }
