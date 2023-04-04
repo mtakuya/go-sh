@@ -8,6 +8,11 @@ func Test_cat(t *testing.T) {
 		t.Error(err)
 	}
 
+	_, err = cat("")
+	if err == nil {
+		t.Error("got true, want false")
+	}
+
 	_, err = cat("cat")
 	if err == nil {
 		t.Error("got true, want false")
